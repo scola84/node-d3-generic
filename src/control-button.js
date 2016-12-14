@@ -13,7 +13,7 @@ export default class ControlButton {
     this._iconName = null;
 
     this._root = select('body')
-      .append('button')
+      .append('div')
       .remove()
       .classed('scola control-button', true)
       .attrs({

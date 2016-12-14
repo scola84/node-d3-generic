@@ -62,12 +62,12 @@ export default class ControlGroupButton extends GroupButton {
     return this;
   }
 
-  _modelSet(event) {
-    if (event.name !== this._name) {
+  _modelSet(setEvent) {
+    if (setEvent.name !== this._name) {
       return;
     }
 
-    if (event.value === this._value) {
+    if (setEvent.value === this._value) {
       this._root.styles({
         'color': '#007AFF'
       });
