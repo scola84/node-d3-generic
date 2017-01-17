@@ -43,7 +43,11 @@ export default class ControlBar {
     return this._root;
   }
 
-  center(element, action) {
+  center(element = null, action = true) {
+    if (element === null) {
+      return this._center;
+    }
+
     if (action === true) {
       this._center.node().appendChild(element.root().node());
     } else if (action === false) {
@@ -53,12 +57,12 @@ export default class ControlBar {
     return this;
   }
 
-  left(element, action) {
+  left(element = null, action = true) {
     if (!this._left) {
       this._sides();
     }
 
-    if (typeof element === 'undefined') {
+    if (element === null) {
       return this._left;
     }
 
@@ -71,12 +75,12 @@ export default class ControlBar {
     return this;
   }
 
-  right(element, action) {
+  right(element = null, action = true) {
     if (!this._right) {
       this._sides();
     }
 
-    if (typeof element === 'undefined') {
+    if (element === null) {
       return this._right;
     }
 
@@ -89,12 +93,8 @@ export default class ControlBar {
     return this;
   }
 
-  title(value) {
-    if (typeof value === 'undefined') {
-      if (!this._title) {
-        this._insertTitle();
-      }
-
+  title(value = null) {
+    if (value === null) {
       return this._title;
     }
 

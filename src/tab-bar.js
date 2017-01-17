@@ -33,7 +33,7 @@ export default class TabBar {
     return this._root;
   }
 
-  append(value, action) {
+  append(value, action = true) {
     if (action === true) {
       this._buttons.add(value);
       this._root.node().appendChild(value.root().node());

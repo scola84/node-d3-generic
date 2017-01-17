@@ -1,9 +1,14 @@
 import { select } from 'd3-selection';
 import GroupButton from './group-button';
+import 'd3-selection-multi';
 
 export default class TabGroupButton extends GroupButton {
   constructor() {
     super();
+
+    this._first = null;
+    this._icon = null;
+    this._text = null;
 
     this._root = select('body')
       .append('div')
@@ -30,9 +35,6 @@ export default class TabGroupButton extends GroupButton {
         'width': '0px'
       });
 
-    this._icon = null;
-    this._text = null;
-
     this.first(false);
     this._bind();
   }
@@ -43,14 +45,28 @@ export default class TabGroupButton extends GroupButton {
     this._root.dispatch('destroy');
     this._root.remove();
     this._root = null;
+
+    super.destroy();
   }
 
   root() {
     return this._root;
   }
 
-  icon(value, size = '2em') {
-    if (typeof value === 'undefined') {
+  first(value = null) {
+    if (value === null) {
+      return this._first;
+    }
+
+    this._first = value;
+    this._border.style('display',
+      value === true ? 'none' : 'inline');
+
+    return this;
+  }
+
+  icon(value = null, size = '2em') {
+    if (value === null) {
       return this._icon;
     }
 
@@ -65,8 +81,8 @@ export default class TabGroupButton extends GroupButton {
     return this;
   }
 
-  text(value) {
-    if (typeof value === 'undefined') {
+  text(value = null) {
+    if (value === null) {
       return this._text;
     }
 
@@ -75,11 +91,6 @@ export default class TabGroupButton extends GroupButton {
     }
 
     this._text.text(value);
-    return this;
-  }
-
-  first(value) {
-    this._border.style('display', value === true ? 'none' : 'inline');
     return this;
   }
 
@@ -108,12 +119,12 @@ export default class TabGroupButton extends GroupButton {
       });
   }
 
-  _modelSet(event) {
-    if (event.name !== this._name) {
+  _modelSet(setEvent) {
+    if (setEvent.name !== this._name) {
       return;
     }
 
-    if (event.value === this._value) {
+    if (setEvent.value === this._value) {
       this._root
         .classed('selected', true)
         .styles({

@@ -64,38 +64,6 @@ export default class ControlButton {
     return this;
   }
 
-  icon(value, size = '2em') {
-    if (typeof value === 'undefined') {
-      return this._icon;
-    }
-
-    if (value === false) {
-      return this._deleteIcon();
-    }
-
-    if (this._icon) {
-      return this._updateIcon(value, size);
-    }
-
-    return this._insertIcon(value, size);
-  }
-
-  text(value) {
-    if (typeof value === 'undefined') {
-      return this._text;
-    }
-
-    if (value === false) {
-      return this._deleteText();
-    }
-
-    if (this._text) {
-      return this._updateText(value);
-    }
-
-    return this._insertText(value);
-  }
-
   center() {
     this._root.styles({
       'display': 'inline-flex',
@@ -121,8 +89,8 @@ export default class ControlButton {
     return this;
   }
 
-  disabled(value) {
-    if (typeof value === 'undefined') {
+  disabled(value = null) {
+    if (value === null) {
       return this._disabled;
     }
 
@@ -130,6 +98,38 @@ export default class ControlButton {
     this._root.classed('disabled', value);
 
     return this;
+  }
+
+  icon(value = null, size = '2em') {
+    if (value === null) {
+      return this._icon;
+    }
+
+    if (value === false) {
+      return this._deleteIcon();
+    }
+
+    if (this._icon) {
+      return this._updateIcon(value, size);
+    }
+
+    return this._insertIcon(value, size);
+  }
+
+  text(value = null) {
+    if (value === null) {
+      return this._text;
+    }
+
+    if (value === false) {
+      return this._deleteText();
+    }
+
+    if (this._text) {
+      return this._updateText(value);
+    }
+
+    return this._insertText(value);
   }
 
   _insertIcon(name, size) {

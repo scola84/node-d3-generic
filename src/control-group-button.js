@@ -1,5 +1,7 @@
 import { select } from 'd3-selection';
 import GroupButton from './group-button';
+import 'd3-selection-multi';
+import 'd3-transition';
 
 export default class ControlGroupButton extends GroupButton {
   constructor() {
@@ -44,8 +46,8 @@ export default class ControlGroupButton extends GroupButton {
     return this._root;
   }
 
-  icon(value) {
-    if (typeof value === 'undefined') {
+  icon(value = null) {
+    if (value === null) {
       return this._icon;
     }
 
@@ -53,8 +55,8 @@ export default class ControlGroupButton extends GroupButton {
     return this;
   }
 
-  text(value) {
-    if (typeof value === 'undefined') {
+  text(value = null) {
+    if (value === null) {
       return this._text;
     }
 
